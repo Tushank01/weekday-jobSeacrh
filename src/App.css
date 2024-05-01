@@ -1,38 +1,120 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 20px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.cards-container {
+  text-align: center;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.role{
+  width: 100px;
+}
+
+.empl_num{
+  width: 200px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.search {
+  background-color: transparent;
+  color: grey;
+  border: 1px solid grey;
+  padding: 8px;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.search-button {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+}
+
+.App-header {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+
+.dropdown {
+  background-color: transparent;
+  color: grey;
+  border: 1px solid grey;
+  padding: 8px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+@media screen and (max-width: 674px) {
+  .dropdown {
+    margin: 5px;
+    flex-basis: 100%; /* Set to full width */
   }
 }
+
+.dropdown option {
+  background-color: #282c34;
+  color: white;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  height: 500px;
+  color: #282c34;
+  border-radius: 22px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  vertical-align: top;
+  width: 270px;
+}
+
+/* App.css */
+
+.custom-button {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.green-button {
+  background-color: greenyellow;
+  color: black;
+}
+
+.blue-button {
+  background-color: blue;
+  color: white;
+}
+
