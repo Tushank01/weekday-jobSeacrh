@@ -1,11 +1,42 @@
 import React from 'react';
 import './App.css';
 import Card from './Card.js'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+  const [jobs, setJobs] = useState([]);
 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
+      const raw = JSON.stringify({
+        "limit": 10,
+        "offset": 0
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw
+      };
+
+      try {
+        const response = await fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions);
+        const data = await response.json();
+        setJobs(data.jdList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
   
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -108,12 +139,16 @@ function App() {
       </br>
       <div className="cards-container">
       <div className="card-row">
-      <Card
-            title="Card 1"
-            content="Job Description 1: Lorem ipsum dolor sit amet.Consectetur adipiscing elitConsectetur adipiscing elit"
-            buttonText="Apply"
-          />
-          
+      {jobs.map(job => (
+            <Card
+              key={job.jdUid}
+              Name={job.jdUid}
+              title={job.jobRole}
+              content={`Job Description: ${job.jobDetailsFromCompany}`}
+              location={job.location}
+              buttonText="Apply"
+            />
+          ))}
            </div>
       </div>
     </div>
