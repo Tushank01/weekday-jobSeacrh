@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Card from './Card.js'
-import { useState } from 'react';
-import { useEffect } from 'react';
-// import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import Card from './Card.js';
+import Select from 'react-select';
 
 function App() {
-  const [Role, setRole]= useState("");
-  const [NumberofEmployee, setNumberofEmployee]= useState("");
-  const [Experience, setExperience]= useState("");
-  const [Location, setLocation]= useState("");
-  const [MinBasePay, setMinBasePay]= useState("");
-  const [Search, setSearch]= useState("");
+  const [Role, setRole] = useState("");
+  const [NumberofEmployee, setNumberofEmployee] = useState("");
+  const [Experience, setExperience] = useState("");
+  const [Location, setLocation] = useState([]);
+  const [MinBasePay, setMinBasePay] = useState("");
+  const [selectedMinBasePay, setSelectedMinBasePay] = useState("");
 
+  const [Search, setSearch] = useState("");
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -42,22 +41,41 @@ function App() {
 
     fetchJobs();
   }, []);
-  
 
+
+  const handleRoleChange = (selectedOptions) => {
+    setRole(selectedOptions.map(option => option.value));
+  };
+
+  const handleLocationChange = (selectedOptions) => {
+    // Extract values from selected options and set the Location state
+    setLocation(selectedOptions.map(option => option.value));
+  };
+
+  const handleExpChange = (selectedOptions) => {
+    setExperience(selectedOptions.map(option => option.value));
+  };
+
+  const handleMinBasePayChange = (selectedOptions) => {
+    setSelectedMinBasePay(selectedOptions.map(option => option.value));
+  };
+  
 
   return (
     <div className="App">
       <header className="App-header">
-        <select onChange={(e)=>setRole(e.target.value)} className="dropdown  role">
-          <option value="" disabled hidden selected >Role</option>
-          <option value="">All</option>
-          <option value="android">android</option>
-          <option value="frontend" >frontend</option>
-          <option value="ios"  >ios</option>
-          <option value="backend"  >backend</option>
-          <option value="tech lead"  >tech lead</option>
-
-        </select>
+        <Select
+          isMulti
+          options={[
+            { value: 'android', label: 'android' },
+            { value: 'ios', label: 'ios' },
+            { value: 'tech lead', label: 'tech lead' },
+            { value: 'backend', label: 'backend' }
+          ]}
+          placeholder="Role"
+          onChange={handleRoleChange}
+        />
+        {/* Other dropdowns */}
         <select className="dropdown empl_num ">
           <option value="" disabled hidden selected >Number of Employees</option>
           <option value="">Dropdown 1</option>
@@ -68,54 +86,81 @@ function App() {
 
           {/* Add more options here */}
         </select>
-        <select className="dropdown">
-          <option value="" disabled hidden selected >Experince</option>
-          <option value="">Dropdown 1</option>
-          <option value="">Dropdown 1</option>
-          {/* Add more options here */}
-        </select>
-        <select onChange={(e)=>setLocation(e.target.value)} className="dropdown">
-          <option value="" disabled hidden selected >Location</option>
-          <option value="">All</option>
-          <option value="mumbai"  >mumbai</option>
-          <option value="bangalore" >bangalore</option>
-          <option value="delhi ncr"   >delhi ncr</option>
-          <option value="chennai"   >chennai</option>
-          <option value="remote"  >remote</option>
-        </select>
+        <Select
+  isMulti
+  options={[
+    { value: '1', label: '1 year' },
+    { value: '2', label: '2 years' },
+    { value: '3', label: '3 years' },
+    { value: '4', label: '4 years' },
+    { value: '5', label: '5 years' },
+    { value: '6', label: '6 years' },
+    { value: '7', label: '7 years' },
+    { value: '8', label: '8 years' },
+    { value: '9', label: '9 years' },
+    { value: '10', label: '10 years' }
+  ]}
+  placeholder="Experience"
+  onChange={handleExpChange}
+/>
 
-        <select className="dropdown empl_num ">
-          <option value="" disabled hidden selected >min base pay salary</option>
-          <option value="">Dropdown 1</option>
-          <option value="">Dropdown 1</option>
-          {/* Add more options here */}
-        </select>
+        <Select
+          isMulti
+          options={[
+            { value: 'bangalore', label: 'Bangalore' },
+            { value: 'mumbai', label: 'Mumbai' },
+            { value: 'delhi ncr', label: 'Delhi NCR' },
+            { value: 'chennai', label: 'chennai' },
+            { value: 'remote', label: 'remote' }
+          ]}
+          placeholder="Location"
+          onChange={handleLocationChange}
+        />
+
+<Select
+  isMulti
+  options={[
+    { value: '100', label: '100' },
+    { value: '60000', label: '60,000' },
+    { value: '70000', label: '70,000' }
+    // Add more options as needed
+  ]}
+  placeholder="Minimum Base Pay"
+  onChange={handleMinBasePayChange}
+/>
+
+
         <div className="search-container">
-          <input value={Search} onChange={(e)=>setSearch(e.target.value)}  type="text" className="search" placeholder="Search..." />
+          <input value={Search} onChange={(e) => setSearch(e.target.value)} type="text" className="search" placeholder="Search..." />
         </div>
-
       </header>
-      <br>
-      </br>
+      <br></br>
       <div className="cards-container">
-      <div className="card-row">
-      {jobs
-      .filter(job=>  ( Role==="" || job.jobRole===Role))
-      .filter(job=> (Location==="" || job.location===Location))
-      .filter(job=> (job.jdUid.includes(Search)))
-      
-      .map(job => (
-            <Card
-              key={job.jdUid}
-              Name={job.jdUid}
-              title={job.jobRole}
-              content={`Job Description: ${job.jobDetailsFromCompany}`}
-              location={job.location}
-              buttonText="Apply"
-              buttonText2="Referral"
-            />
-          ))}
-           </div>
+        <div className="card-row">
+          {jobs
+            .filter(job => (Role.length === 0 || Role.includes(job.jobRole)))
+            .filter(job => (Experience.length === 0 || Experience.includes(job.minExp.toString())))
+            .filter(job => (Location.length === 0 || Location.includes(job.location)))
+            .filter(job => (job.jdUid.includes(Search)))
+            .filter(job => (
+              (selectedMinBasePay.length === 0) ||
+              (job.minBasePay && selectedMinBasePay.includes(job.minBasePay.toString()))
+            ))
+            
+            .map(job => (
+              <Card
+                key={job.jdUid}
+                Name={job.jdUid}
+                title={job.jobRole}
+                content={`Job Description: ${job.jobDetailsFromCompany}`}
+                location={job.location}
+                experience={job.minExp}
+                minPay={job.minJdSalary}
+                buttonText="Apply"
+                buttonText2="Referral"
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
