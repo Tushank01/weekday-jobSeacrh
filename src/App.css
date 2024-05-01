@@ -17,6 +17,40 @@
   width: 200px;
 }
 
+.card-jobrole {
+  font-size: 15px;
+  color: #888;
+  font-weight: bold;
+  /* position: absolute; */
+  top: 70px;
+  left: 90px;
+}
+
+.location{
+  color:#555; /* Change the color to red as an example */
+  font-weight: bold; /* Make the font bold as an example */  
+  margin-top: 0;
+  margin-bottom: 0px;
+  /* padding-left: 20px; Add padding to make space for the image */
+  text-align: left;
+  margin-left: 70px;
+}
+
+.Job-id{
+  color: black;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 12px;
+  text-align: left;
+  margin-left: 70px;
+  
+  
+}
+
+
+.Job-content{
+  max-height: 236px;
+}
+
 .search-container {
   display: flex;
   align-items: center;
@@ -97,9 +131,11 @@
   vertical-align: top;
   width: 270px;
   overflow: hidden;
+  position: relative;
 }
+
 .card-content {
-  max-height: 350px; /* Limit the height of the content */
+  max-height: 300px; /* Limit the height of the content */
   overflow: hidden; /* Hide overflowing content */
   position: relative; /* Position relative for absolute positioning of gradient */
 }
@@ -114,6 +150,10 @@
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white); /* Add a gradient overlay */
 }
 
+.blue-botton{
+  color: #4943da;
+  
+}
 
 /* App.css */
 
@@ -123,6 +163,8 @@
   width: 100%;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
+
 }
 
 .green-button {
