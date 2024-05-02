@@ -23,6 +23,7 @@
 }
 
 .view-jd {
+  cursor: pointer;
   color: rgb(61, 61, 255);
   position: absolute;
   bottom: -15px; /* Adjust as needed */
