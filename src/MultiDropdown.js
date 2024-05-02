@@ -2,7 +2,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const Dropdowns = ({ value, SetValue, Options, placeholder}) => {
+const MultiDropdown = ({ value, SetValue, Options, placeholder}) => {
 
   const handleRoleChange = (selectedOptions) => {
     
@@ -24,7 +24,6 @@ const Dropdowns = ({ value, SetValue, Options, placeholder}) => {
   };
 
   return (
-
     <Select
       isMulti
       options={Options}
@@ -33,10 +32,7 @@ const Dropdowns = ({ value, SetValue, Options, placeholder}) => {
       onChange={handleRoleChange}
       styles={customStyles} 
     />
-
-    
-
   );
 };
 
-export default Dropdowns;
+export default MultiDropdown;

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Card from './Card.js';
-import Select from 'react-select';
-import Dropdown from "./Dropdowns.js";
+import View from './View.js'; // Import the View component
+import SingleDropdown from "./SingleDropdown.js";
+import MultiDropdown from "./MultiDropdown.js";
+
 
 function App() {
-  const [Role, setRole] = useState("");
-  const [NumberofEmployee, setNumberofEmployee] = useState("");
-  const [Experience, setExperience] = useState("");
+  const [Role, setRole] = useState([]);
+  const [CurrencyCode, setCurrencyCode] = useState("");
+  const [Experience, setExperience] = useState(null);
   const [Location, setLocation] = useState([]);
-  const [MinBasePay, setMinBasePay] = useState("");
-  const [selectedMinBasePay, setSelectedMinBasePay] = useState("");
+  const [MinBasePay, setMinBasePay] = useState(null);
+
 
   const [Search, setSearch] = useState("");
   const [jobs, setJobs] = useState([]);
@@ -74,7 +76,7 @@ function App() {
     ]
 
     const minbaseOptions = [
-      { value: '0', label: '0 LPA' },
+      { value: '0',  label: '0 LPA' },
       { value: '10', label: '10 LPA' },
       { value: '20', label: '20 LPA' },
       { value: '30', label: '30 LPA' },
@@ -84,31 +86,15 @@ function App() {
       { value: '70', label: '70 LPA' },
       { value: '80', label: '80 LPA' },
       { value: '90', label: '90 LPA' },
-      { value: '100', label: '100 LPA' },
-      { value: '10', label: '100 LPA' },
-  
-  
+      { value: '100', label: '100 LPA' }
       // Add more options as needed
     ]
 
-
-  const handleRoleChange = (selectedOptions) => {
-    setRole(selectedOptions.map(option => option.value));
-  };
-
-  const handleLocationChange = (selectedOptions) => {
-    // Extract values from selected options and set the Location state
-    setLocation(selectedOptions.map(option => option.value));
-  };
-
-  const handleExpChange = (selectedOptions) => {
-    setExperience(selectedOptions.map(option => option.value));
-  };
-
-  const handleMinBasePayChange = (selectedOptions) => {
-    setSelectedMinBasePay(selectedOptions.map(option => option.value));
-  };
-  
+    const currencyOptions =[
+      { value: 'INR',  label: 'INR' },
+      { value: 'CAD', label: 'CAD' },
+      { value: 'USD', label: 'USD' }
+    ]
   
   // Custom styles for react-select
 // Custom styles for react-select
@@ -130,18 +116,17 @@ const customStyles = {
   return (
     <div className="App">
       <header className="App-header">
-      <Dropdown value={Role} placeholder={"Role"} Options={roleOptions} SetValue={ (v)=> setRole(v) } /> 
+      <MultiDropdown value={Role}   placeholder={"Role"} Options={roleOptions} SetValue={ (v)=> setRole(v) } /> 
         
-        <select className="dropdown empl_num ">
-          <option value="" disabled hidden selected >Number of Employees</option>
+      <MultiDropdown value={CurrencyCode}   placeholder={"Curreny Code"} Options={currencyOptions} SetValue={ (v)=> setCurrencyCode(v) } /> 
+       
 
 
-          
-        </select>
-        <Dropdown value={Experience} placeholder={"Experience"} Options={expOptions} SetValue={ (v)=> setExperience(v) } />
-        <Dropdown value={Location} placeholder={"Location"} Options={locationOptions} SetValue={ (v)=> setLocation(v) } />
+        <SingleDropdown value={Experience}  placeholder={"Experience"} Options={expOptions} SetValue={ (v)=> setExperience(v) } />
+        <MultiDropdown value={Location}  placeholder={"Location"} Options={locationOptions} SetValue={ (v)=> setLocation(v) } />
 
-        <Dropdown value={MinBasePay} placeholder={"Min Base Pay"} Options={minbaseOptions} SetValue={ (v)=> setMinBasePay(v) } />
+        
+        <SingleDropdown value={MinBasePay}  placeholder={"Min Base Pay"} Options={minbaseOptions} SetValue={ (v)=> setMinBasePay(v) } />
 
         <div className="search-container">
           <input value={Search} onChange={(e) => setSearch(e.target.value)} type="text" className="search" placeholder="Search..." />
@@ -152,14 +137,11 @@ const customStyles = {
         <div className="card-row">
           {jobs
             .filter(job => (Role.length === 0 || Role.some( role=>role.value ===  job.jobRole)))
-            .filter(job => (Experience.length === 0 || (job.minExp !== null && Experience.some( experience=> parseInt(experience.value) <= parseInt(job.minExp.toString())))))
-            .filter(job => (Location.length === 0 || Location.some( location=>location.value===   job.location)))
+            .filter(job => (CurrencyCode.length === 0 || CurrencyCode.some( currency=>currency.value ===  job.salaryCurrencyCode)))
+            .filter(job => (Experience === null|| ( job.minExp!== null &&  parseInt(Experience.value) >= parseInt(job.minExp))))
+            .filter(job => (Location.length === 0 || Location.some( location=>location.value  ===   job.location)))
             .filter(job => (job.jdUid.includes(Search)))
-            .filter(job => (
-              (selectedMinBasePay.length === 0) ||
-              (job.minJdSalary && selectedMinBasePay.some( minpays=>minpays.value >= ( min => parseInt(min) <= parseInt(job.minJdSalary ))))
-            ))
-
+            .filter(job => (MinBasePay === null || (job.minJdSalary!==null && parseInt(MinBasePay.value) <= parseInt(job.minJdSalary))))
             .map(job => (
               <Card
                 key={job.jdUid}
