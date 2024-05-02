@@ -60,6 +60,24 @@ function App() {
     setSelectedMinBasePay(selectedOptions.map(option => option.value));
   };
   
+  
+  // Custom styles for react-select
+// Custom styles for react-select
+// Custom styles for react-select
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    color: state.isSelected ? 'white' : 'black', // Set the text color based on selection
+    backgroundColor: state.isSelected ? '#007bff' : 'white', // Set background color based on selection
+    textAlign: 'left', // Align text to the left
+    '&:hover': {
+      backgroundColor: '#f8f9fa', // Change background color on hover
+      color: 'blue', // Change text color on hover
+    },
+  }),
+};
+
+
 
   return (
     <div className="App">
@@ -70,10 +88,12 @@ function App() {
             { value: 'android', label: 'android' },
             { value: 'ios', label: 'ios' },
             { value: 'tech lead', label: 'tech lead' },
-            { value: 'backend', label: 'backend' }
+            { value: 'backend', label: 'backend' },
+            { value: 'frontend', label: 'frontend' }
           ]}
           placeholder="Role"
           onChange={handleRoleChange}
+          styles={customStyles} 
         />
         {/* Other dropdowns */}
         <select className="dropdown empl_num ">
@@ -102,6 +122,7 @@ function App() {
   ]}
   placeholder="Experience"
   onChange={handleExpChange}
+  styles={customStyles} 
 />
 
         <Select
@@ -115,6 +136,7 @@ function App() {
           ]}
           placeholder="Location"
           onChange={handleLocationChange}
+          styles={customStyles} 
         />
 
 <Select
@@ -128,8 +150,6 @@ function App() {
   placeholder="Minimum Base Pay"
   onChange={handleMinBasePayChange}
 />
-
-
         <div className="search-container">
           <input value={Search} onChange={(e) => setSearch(e.target.value)} type="text" className="search" placeholder="Search..." />
         </div>
@@ -144,8 +164,10 @@ function App() {
             .filter(job => (job.jdUid.includes(Search)))
             .filter(job => (
               (selectedMinBasePay.length === 0) ||
-              (job.minBasePay && selectedMinBasePay.includes(job.minBasePay.toString()))
+              (job.minJdSalary && selectedMinBasePay.includes(job.minJdSalary.toString()))
             ))
+            
+            
             
             .map(job => (
               <Card
@@ -153,11 +175,12 @@ function App() {
                 Name={job.jdUid}
                 title={job.jobRole}
                 content={`Job Description: ${job.jobDetailsFromCompany}`}
+                minPay={job.minJdSalary}
+                maxPay={job.maxJdSalary}
                 location={job.location}
                 experience={job.minExp}
-                minPay={job.minJdSalary}
-                buttonText="Apply"
-                buttonText2="Referral"
+                buttonText="Easy Apply"
+                buttonText2=" Unlock Referral asks"
               />
             ))}
         </div>
