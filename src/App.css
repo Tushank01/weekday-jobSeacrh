@@ -4,48 +4,54 @@
   color: white;
 }
 
-.experience{
+.experience {
   font-size: 10px;
   text-align: left;
   font-size: 10px;
   margin: 0px 0px;
-
 }
 
-.minimum-exp{
+.no-job-found {
+  color: black;
+}
+
+.bold-light {
+  margin-left: -160px;
+  margin-top: -20px;
+  color: yellow;
+}
+
+.minimum-exp {
   text-align: left;
   font-weight: 600;
   font-size: 15px;
   margin-top: 8px;
   margin-bottom: 0px;
-  color:#888;
-  
+  color: #888;
 }
 
 .view-jd {
   cursor: pointer;
   color: rgb(61, 61, 255);
   position: absolute;
-  bottom: -15px; /* Adjust as needed */
-  right: 110px; /* Adjust as needed */
+  bottom: -15px; 
+  right: 110px; 
   z-index: 1; /* Ensure the button appears above other content */
 }
 
-
-.minpay{
+.minpay {
   display: none;
 }
 
 .cards-container {
   text-align: center;
-
 }
 
-.role{
+.role {
   width: 100px;
 }
 
-.empl_num{
+.empl_num {
   width: 200px;
 }
 
@@ -55,8 +61,6 @@
   border-radius: 50px;
   position: relative;
   top: 0px;
-  
-
 }
 
 .card-jobrole {
@@ -70,37 +74,31 @@
   margin: 0px;
 }
 
-.location{
-  color:#555; /* Change the color to red as an example */
-  font-weight: bold; /* Make the font bold as an example */  
+.location {
+  color: #555;
+  font-weight: bold; 
   margin-top: 14px;
-  /* margin-bottom: 0px; */
-  /* padding-left: 20px; Add padding to make space for the image */
   text-align: left;
-  /* margin-left: 70px; */
   font-size: 11px;
 }
 
-.Job-id{
+.Job-id {
   color: black;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 12px;
   text-align: left;
   margin: 0px 0px;
-  /* margin-left: 70px; */
 }
 
-.estimate-salary{
+.estimate-salary {
   font-size: 10px;
   font-weight: 600;
   white-space: nowrap; /* Ensures that text does not wrap to the next line */
   /* overflow: hidden; Hides any overflow */
-  text-overflow: ellipsis; 
-  
-  
+  text-overflow: ellipsis;
 }
 
-.Job-content{
+.Job-content {
   max-height: 160px;
   font-weight: 400;
   margin-top: 0px;
@@ -130,8 +128,14 @@
 
 .App-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
+  width: 1000px;
+}
+
+.dropdown-collection {
+  display: flex;
+  justify-content: center;
 }
 
 .dropdown {
@@ -142,7 +146,6 @@
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
-  
 }
 
 @media screen and (max-width: 674px) {
@@ -187,7 +190,6 @@
   width: 270px;
   overflow: hidden;
   position: relative;
-  /* margin-top: 5px; */
 }
 .grid-container {
   display: grid;
@@ -197,7 +199,6 @@
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 10px;
-  /* padding-left: 10px; */
 }
 
 .card-content {
@@ -207,16 +208,15 @@
   text-align: left;
   font-weight: 400;
   font-size: 14px;
-
 }
 
-.about-company{
+.about-company {
   text-align: left;
   font-weight: 450;
   margin: 0px 0px;
 }
 
-.about-us{
+.about-us {
   text-align: left;
   font-family: 550;
   margin: 0px 0px;
@@ -228,15 +228,21 @@
   left: 0;
   right: 0;
   height: 100px; /* Height of the gradient */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white); /* Add a gradient overlay */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    white
+  ); /* Add a gradient overlay */
 }
 
-.blue-botton{
+.blue-botton {
   color: #4943da;
-  
 }
 
-/* App.css */
+.no-data-found {
+  color: black;
+}
+
 
 .custom-button {
   padding: 10px;
@@ -245,7 +251,16 @@
   border: none;
   cursor: pointer;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: center; /* Add this line */
+}
 
+.bold-icon {
+  margin-left: 5px;
+  color: rgb(216, 216, 19);
+  border-color: rgb(242, 138, 2);
 }
 
 .green-button {
@@ -257,4 +272,3 @@
   background-color: blue;
   color: white;
 }
-
