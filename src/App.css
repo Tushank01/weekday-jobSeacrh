@@ -206,8 +206,9 @@ body {
   position: relative;
   background-color: #fff;
   margin-bottom: 20px;
-
+  
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;

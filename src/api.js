@@ -4,7 +4,7 @@ export async function fetchJobsData() {
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
-    limit: 500,
+    limit: 11657,
     offset: 0,
   });
 

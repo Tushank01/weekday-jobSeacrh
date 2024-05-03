@@ -16,22 +16,6 @@ function Card({
   buttonText,
   buttonText2,
 }) {
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    const dataToSave = {
-      jbUid: Name,
-      jobRole: title,
-      jobDetailsFromCompany: content,
-      location: location,
-      minExp: experience,
-      minJdSalary: minPay,
-      maxJdSalary: maxPay,
-
-    };
-    console.log(dataToSave);
-    dispatch(fetchJobDetails(dataToSave));
-  };
 
   const displaySalary =
     minPay !== null
@@ -40,15 +24,15 @@ function Card({
 
   return (
     <div className="card">
-      <div className="grid-container">
-        <div className="grid-item">
+      <div className="">
+        <div className="">
           <img src={logo} alt="Job Image" className="job-image" />
         </div>
-        <div className="grid-item-value">
+        
           <h3 className="Job-id">{Name}</h3>
           <h3 className="card-jobrole">{title}</h3>
           <h3 className="location">{location}</h3>
-        </div>
+        
         <p className="estimate-salary">{displaySalary}</p>
       </div>
       <h3 className="about-company">About Company: </h3>
@@ -65,7 +49,7 @@ function Card({
           <p className="experience">{experience} years</p>
         </div>
       )}
-      <button className="custom-button green-button" onClick={handleClick}>
+      <button className="custom-button green-button" >
         <span className="bold-icon">
           <BoltIcon />
         </span>
