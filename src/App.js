@@ -3,9 +3,8 @@ import "./App.css";
 import Card from "./Card.js";
 import SingleDropdown from "./SingleDropdown.js";
 import MultiDropdown from "./MultiDropdown.js";
-import FindReplaceIcon from "@mui/icons-material/FindReplace";
 import { fetchJobsData } from "./api"; // Import a function to fetch job data from an API
-import NoJobsFound from "./NoJobsFound.js"; // Import the new component
+import NoJobsFound from "./NoJobsFound.js"; 
 
 function App() {
   // State variables to manage user selections and job data
@@ -19,7 +18,7 @@ function App() {
   const [Search, setSearch] = useState("");
   const [jobs, setJobs] = useState([]);
 
-   // Fetch jobs data from API when component mounts
+   
     // Fetch jobs data from API when component mounts
     useEffect(() => {
       const fetchJobs = async () => {
@@ -127,13 +126,13 @@ function App() {
           />
 
           <div className="search-container">
-            <input
-              value={Search}
-              onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              className="search"
-              placeholder="Search..."
-            />
+          <input
+  value={Search}
+  onChange={(e) => setSearch(e.target.value.toLowerCase())} // Convert input value to lowercase
+  type="text"
+  className="search"
+  placeholder="Search..."
+/>
           </div>
         </header>
       </div>
@@ -165,7 +164,8 @@ function App() {
                 Location.length === 0 ||
                 Location.some((location) => location.value === job.location)
             )
-            .filter((job) => job.jdUid.includes(Search))
+            .filter((job) => job.companyName.toLowerCase().includes(Search))
+
             .filter(
               (job) =>
                 MinBasePay === null ||
@@ -176,13 +176,14 @@ function App() {
             .map((job) => (
               <Card
                 key={job.jdUid}
-                Name={job.jdUid}
+                Name={job.companyName}
                 title={job.jobRole}
                 content={`Job Description: ${job.jobDetailsFromCompany}`}
                 minPay={job.minJdSalary}
                 maxPay={job.maxJdSalary}
                 location={job.location}
                 experience={job.minExp}
+                logo={job.logoUrl}
                 buttonText="Easy Apply"
                 buttonText2=" Unlock Referral asks"
               />
@@ -214,7 +215,7 @@ function App() {
                   Location.length === 0 ||
                   Location.some((location) => location.value === job.location)
               )
-              .filter((job) => job.jdUid.includes(Search))
+              .filter((job) => job.companyName.toLowerCase().includes(Search))
               .filter(
                 (job) =>
                   MinBasePay === null ||

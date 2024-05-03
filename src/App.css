@@ -47,6 +47,21 @@
   text-align: center;
 }
 
+/* Hide horizontal scrollbar */
+body {
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar in Chrome, Safari, and Opera */
+.cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
 .role {
   width: 100px;
 }
@@ -58,9 +73,8 @@
 .job-image {
   width: 100px;
   height: 100px;
-  border-radius: 50px;
-  position: relative;
-  top: 0px;
+  float: left; /* Float the image to the left */
+  margin-right: 10px; /* Add margin-right to create space between image and text */
 }
 
 .card-jobrole {
@@ -87,7 +101,7 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 12px;
   text-align: left;
-  margin: 0px 0px;
+  margin-top: 15px;
 }
 
 .estimate-salary {
@@ -190,13 +204,22 @@
   width: 270px;
   overflow: hidden;
   position: relative;
+  background-color: #fff;
+  margin-bottom: 20px;
+
 }
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;
 }
 .grid-item {
-  padding-top: 0px;
+ padding-left: 0px ;
+  align-items: left ;
+}
+
+.grid-item-value{
+  align-items: left ;
+  padding-top: 10px;
   padding-left: 0px;
   padding-right: 10px;
 }
@@ -244,6 +267,7 @@
 }
 
 
+
 .custom-button {
   padding: 10px;
   margin-top: 10px;
@@ -255,6 +279,8 @@
   align-items: center;
   margin-top: 10px;
   justify-content: center; /* Add this line */
+  font-weight: 700;
+
 }
 
 .bold-icon {
@@ -271,4 +297,10 @@
 .blue-button {
   background-color: blue;
   color: white;
+}
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+  cursor: pointer; /* Change cursor to pointer */
 }

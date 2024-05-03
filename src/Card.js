@@ -12,6 +12,7 @@ function Card({
   experience,
   minPay,
   maxPay,
+  logo,
   buttonText,
   buttonText2,
 }) {
@@ -26,6 +27,7 @@ function Card({
       minExp: experience,
       minJdSalary: minPay,
       maxJdSalary: maxPay,
+
     };
     console.log(dataToSave);
     dispatch(fetchJobDetails(dataToSave));
@@ -40,9 +42,9 @@ function Card({
     <div className="card">
       <div className="grid-container">
         <div className="grid-item">
-          <img src={jobImage} alt="Job Image" className="job-image" />
+          <img src={logo} alt="Job Image" className="job-image" />
         </div>
-        <div className="grid-item">
+        <div className="grid-item-value">
           <h3 className="Job-id">{Name}</h3>
           <h3 className="card-jobrole">{title}</h3>
           <h3 className="location">{location}</h3>
